@@ -69,8 +69,7 @@
 		44CA46A32892D83400A083FE /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
-				44CA46B92892D88000A083FE /* FeedItem.swift */,
-				44CA46BB2892D8E700A083FE /* FeedLoader.swift */,
+				44CA46BD2892D98E00A083FE /* Feed Feature */,
 			);
 			path = EssentialFeed;
 			sourceTree = "<group>";
@@ -80,6 +79,15 @@
 			children = (
 			);
 			path = EssentialFeedTests;
+			sourceTree = "<group>";
+		};
+		44CA46BD2892D98E00A083FE /* Feed Feature */ = {
+			isa = PBXGroup;
+			children = (
+				44CA46B92892D88000A083FE /* FeedItem.swift */,
+				44CA46BB2892D8E700A083FE /* FeedLoader.swift */,
+			);
+			path = "Feed Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
