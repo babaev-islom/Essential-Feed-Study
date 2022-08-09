@@ -187,17 +187,17 @@ final class CodableFeedStoreTests: XCTestCase {
         insert((uniqueImageFeed().local, Date()), to: sut)
         
         let deletionError = delete(with: sut)
-        XCTAssertNil(deletionError, "Expected successful deletion")
         
+        XCTAssertNil(deletionError, "Expected successful deletion")
         expect(sut, toRetrieve: .empty)
     }
 
     func test_delete_deliversErrorOnDeletionError() {
         let noDeletePermissionStoreURL = FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask).first!
         let sut = makeSUT(storeURL: noDeletePermissionStoreURL)
-        insert((uniqueImageFeed().local, Date()), to: sut)
         
         let deletionError = delete(with: sut)
+        
         XCTAssertNotNil(deletionError, "Expected deletion to fail")
     }
     
