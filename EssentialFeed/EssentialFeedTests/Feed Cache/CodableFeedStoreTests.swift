@@ -200,7 +200,19 @@ final class CodableFeedStoreTests: XCTestCase {
         
         expect(sut, toRetrieve: .empty)
     }
-    
+
+    func test_delete_deliversErrorOnDeletionError() {
+        let noDeletePermissionStoreURL = FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask).first!
+        let sut = makeSUT(storeURL: noDeletePermissionStoreURL)
+        insert((uniqueImageFeed().local, Date()), to: sut)
+        
+        let exp = expectation(description: "Wait for cache deletion")
+        sut.deleteCachedFeed { deletionError in
+            XCTAssertNotNil(deletionError, "Expected deletion to fail")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
     //MARK: - Helpers
     
     private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableFeedStore {
