@@ -178,7 +178,7 @@ final class CodableFeedStoreTests: XCTestCase {
         
         let deletionError = delete(with: sut)
         
-        XCTAssertNil(deletionError, "Expected successful deletion")
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
         expect(sut, toRetrieve: .empty)
     }
     
@@ -188,7 +188,7 @@ final class CodableFeedStoreTests: XCTestCase {
         
         let deletionError = delete(with: sut)
         
-        XCTAssertNil(deletionError, "Expected successful deletion")
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
         expect(sut, toRetrieve: .empty)
     }
 
@@ -198,7 +198,7 @@ final class CodableFeedStoreTests: XCTestCase {
         
         let deletionError = delete(with: sut)
         
-        XCTAssertNotNil(deletionError, "Expected deletion to fail")
+        XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
     }
     
     //MARK: - Helpers
