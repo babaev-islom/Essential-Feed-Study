@@ -101,7 +101,7 @@ public class CoreDataFeedStore: FeedStore {
                     completion(.empty)
                 }
             } catch {
-                
+                completion(.failure(error))
             }
             
         }
