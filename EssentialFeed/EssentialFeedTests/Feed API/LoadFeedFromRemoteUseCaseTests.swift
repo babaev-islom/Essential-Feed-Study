@@ -59,7 +59,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
-        let invalidJSON = Data(bytes: "invalid json".utf8)
+        let invalidJSON = Data("invalid json".utf8)
 
         expect(sut, toCompleteWith: failure(.invalidData), when: {
             client.complete(withStatusCode: 200, data: invalidJSON)
