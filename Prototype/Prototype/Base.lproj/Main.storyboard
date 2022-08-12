@@ -115,6 +115,7 @@ Description Descrption</string>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="aVe-Xd-Syi" id="lQY-i6-Hg5"/>
+                                    <outlet property="feedImageContainer" destination="2VX-4h-Yyd" id="fkk-d7-BXv"/>
                                     <outlet property="feedImageView" destination="dkH-iy-fPu" id="u6p-tt-bqM"/>
                                     <outlet property="locationContainer" destination="uml-7r-mYf" id="VhR-PI-SPS"/>
                                     <outlet property="locationLabel" destination="0Iw-Pl-2N1" id="ur6-E5-Sgm"/>
