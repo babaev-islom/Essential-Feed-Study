@@ -12,6 +12,7 @@
 		44CFA88E28A6373E00C77FE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44CFA88C28A6373E00C77FE2 /* Main.storyboard */; };
 		44CFA89028A6373F00C77FE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44CFA88F28A6373F00C77FE2 /* Assets.xcassets */; };
 		44CFA89328A6373F00C77FE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44CFA89128A6373F00C77FE2 /* LaunchScreen.storyboard */; };
+		44CFA89B28A6437B00C77FE2 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFA89A28A6437B00C77FE2 /* FeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		44CFA88F28A6373F00C77FE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44CFA89228A6373F00C77FE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44CFA89428A6373F00C77FE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44CFA89A28A6437B00C77FE2 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				44CFA88628A6373E00C77FE2 /* AppDelegate.swift */,
 				44CFA88828A6373E00C77FE2 /* SceneDelegate.swift */,
 				44CFA88C28A6373E00C77FE2 /* Main.storyboard */,
+				44CFA89A28A6437B00C77FE2 /* FeedViewController.swift */,
 				44CFA88F28A6373F00C77FE2 /* Assets.xcassets */,
 				44CFA89128A6373F00C77FE2 /* LaunchScreen.storyboard */,
 				44CFA89428A6373F00C77FE2 /* Info.plist */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44CFA88728A6373E00C77FE2 /* AppDelegate.swift in Sources */,
+				44CFA89B28A6437B00C77FE2 /* FeedViewController.swift in Sources */,
 				44CFA88928A6373E00C77FE2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,7 +307,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -332,7 +336,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
