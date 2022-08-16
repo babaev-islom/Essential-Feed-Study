@@ -22,15 +22,6 @@ public final class FeedUIComposer {
         presentationAdapter.presenter = presenter
         return feedController
     }
-    
-    private static func adaptFeedToCellControllers(forwardingTo controller: FeedViewController, loader: FeedImageDataLoader) -> ([FeedImage]) -> Void {
-        return { [weak controller] feed in
-            controller?.tableModel = feed.map { feedImage in
-                let viewModel = FeedImageViewModel(model: feedImage, imageLoader: loader, imageTransformer: UIImage.init)
-                return FeedImageCellController(viewModel: viewModel)
-            }
-        }
-    }
 }
 
 private final class WeakRefVirtualProxy<T: AnyObject> {
@@ -47,6 +38,12 @@ extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
     }
 }
 
+extension WeakRefVirtualProxy: FeedImageView where T: FeedImageView, T.Image == UIImage {
+    func display(_ viewModel: FeedImageViewModel<UIImage>) {
+        object?.display(viewModel)
+    }
+}
+
 private final class FeedViewAdapter: FeedView {
     private weak var controller: FeedViewController?
     private let imageLoader: FeedImageDataLoader
@@ -58,8 +55,11 @@ private final class FeedViewAdapter: FeedView {
     
     func display(_ viewModel: FeedViewModel) {
         controller?.tableModel = viewModel.feed.map { feedImage in
-            let viewModel = FeedImageViewModel(model: feedImage, imageLoader: imageLoader, imageTransformer: UIImage.init)
-            return FeedImageCellController(viewModel: viewModel)
+            let adapter = FeedImageDataLoaderPresentationAdapter<WeakRefVirtualProxy<FeedImageCellController>, UIImage>(model: feedImage, imageLoader: imageLoader)
+            let cellController = FeedImageCellController(loadImageData: adapter.loadImageData, cancelImageDataLoad: adapter.cancelImageDataLoad)
+            let presenter = FeedImagePresenter(view: WeakRefVirtualProxy(cellController), imageTransformer: UIImage.init)
+            adapter.presenter = presenter
+            return cellController
         }
     }
 }
@@ -84,4 +84,36 @@ private final class FeedLoaderPresentationAdapter: FeedRefreshViewControllerDele
             }
         }
     }
+}
+
+
+private final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image> where View.Image == Image {
+    private let model: FeedImage
+    private let imageLoader: FeedImageDataLoader
+    private var task: FeedImageDataLoaderTask?
+    
+    var presenter: FeedImagePresenter<View, Image>?
+    
+    init(model: FeedImage, imageLoader: FeedImageDataLoader) {
+        self.model = model
+        self.imageLoader = imageLoader
+    }
+    
+    func loadImageData() {
+        presenter?.didStartLoadingImageData(for: model)
+        self.task = imageLoader.loadImageData(from: model.url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                self.presenter?.didFinishLoadingImageData(with: data, for: self.model)
+            case let .failure(error):
+                self.presenter?.didFinishLoadingImageData(with: error, for: self.model)
+            }
+        }
+    }
+    
+    func cancelImageDataLoad() {
+        task?.cancel()
+    }
+    
 }
