@@ -458,7 +458,6 @@
 			children = (
 				44F26BA728AB86FC00AA5DB9 /* Helpers */,
 				4442DE1128A685D300FA294F /* FeedViewControllerTests.swift */,
-				44F26BAE28AB87A700AA5DB9 /* FeedImageCell+TestHelpers.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -467,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				44F26BB028AB87CA00AA5DB9 /* FeedViewController+TestHelpers.swift */,
+				44F26BAE28AB87A700AA5DB9 /* FeedImageCell+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
