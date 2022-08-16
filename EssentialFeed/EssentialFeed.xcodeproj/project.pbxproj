@@ -183,6 +183,7 @@
 		44F26BD128ABE2A900AA5DB9 /* FeedVIewController+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedVIewController+Localization.swift"; sourceTree = "<group>"; };
 		44F26BD428ABE32A00AA5DB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		44F26BD628ABE34D00AA5DB9 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
+		44F26BD728ABE37200AA5DB9 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
 		44FCAC792897CB5400293E68 /* LoadFeedFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
 		44FCAC7C2897D22000293E68 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 		44FCAC7E2897F5F700293E68 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -695,6 +696,7 @@
 				en,
 				Base,
 				"pt-BR",
+				el,
 			);
 			mainGroup = 44CA46972892D83400A083FE;
 			productRefGroup = 44CA46A22892D83400A083FE /* Products */;
@@ -895,6 +897,7 @@
 			children = (
 				44F26BD428ABE32A00AA5DB9 /* en */,
 				44F26BD628ABE34D00AA5DB9 /* pt-BR */,
+				44F26BD728ABE37200AA5DB9 /* el */,
 			);
 			name = Feed.strings;
 			sourceTree = "<group>";
