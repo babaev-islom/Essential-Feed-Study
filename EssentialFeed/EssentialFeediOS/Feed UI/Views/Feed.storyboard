@@ -130,6 +130,7 @@ Description Descrption</string>
                         <connections>
                             <outlet property="dataSource" destination="XaC-gk-vdm" id="x2E-wC-z1N"/>
                             <outlet property="delegate" destination="XaC-gk-vdm" id="F8q-Wg-lCK"/>
+                            <outlet property="prefetchDataSource" destination="XaC-gk-vdm" id="Kf1-B4-NfT"/>
                         </connections>
                     </tableView>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="vQ4-I2-xz4">
