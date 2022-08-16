@@ -30,8 +30,8 @@ final class FeedImageCellController: FeedImageView {
         cell?.locationLabel.text = viewModel.location
         cell?.descriptionLabel.text = viewModel.description
         cell?.onRetry = loadImageData
+        cell?.feedImageView.setImageAnimated(viewModel.image)
         cell?.feedImageRetryButton.isHidden = !viewModel.shouldRetry
-        cell?.feedImageView.image = viewModel.image
         cell?.feedImageContainer.isShimmering = viewModel.isLoading
     }
     
@@ -48,4 +48,3 @@ final class FeedImageCellController: FeedImageView {
         cell = nil
     }
 }
-
