@@ -19,10 +19,11 @@ final class FeedImageCellController: FeedImageView {
         self.cancelImageDataLoad = cancelImageDataLoad
     }
     
-    func view() -> UITableViewCell {
-        self.cell = FeedImageCell()
+    func view(in tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedImageCell") as! FeedImageCell
+        self.cell = cell
         loadImageData()
-        return cell!
+        return cell
     }
     
     func display(_ viewModel: FeedImageViewModel<UIImage>) {
@@ -40,6 +41,11 @@ final class FeedImageCellController: FeedImageView {
     }
     
     func cancelLoad() {
+        releaseCellForReuse()
         cancelImageDataLoad()
+    }
+    
+    private func releaseCellForReuse() {
+        cell = nil
     }
 }
