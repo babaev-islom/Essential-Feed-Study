@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44100FAB28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */; };
+		44100FAD28AE2D7A00BCE019 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44100FAC28AE2D7A00BCE019 /* WeakRefVirtualProxy.swift */; };
 		4442DE1228A685D300FA294F /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442DE1128A685D300FA294F /* FeedUIIntegrationTests.swift */; };
 		4442DE1428A90A5300FA294F /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; };
 		4442DE1528A90A5300FA294F /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -130,6 +131,7 @@
 
 /* Begin PBXFileReference section */
 		44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
+		44100FAC28AE2D7A00BCE019 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		4442DE1128A685D300FA294F /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		4442DE1A28A9105F00FA294F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		444FBB0A28991EA500CE44D8 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				44F26BB828AB8DB900AA5DB9 /* FeedUIComposer.swift */,
+				44100FAC28AE2D7A00BCE019 /* WeakRefVirtualProxy.swift */,
 				44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */,
 			);
 			path = Composers;
@@ -856,6 +859,7 @@
 				4442DE1B28A9105F00FA294F /* FeedViewController.swift in Sources */,
 				44EDC12A28AA2CB6002B0416 /* FeedImageCell.swift in Sources */,
 				44F26BB528AB8AE000AA5DB9 /* FeedImageCellController.swift in Sources */,
+				44100FAD28AE2D7A00BCE019 /* WeakRefVirtualProxy.swift in Sources */,
 				44F26BB928AB8DB900AA5DB9 /* FeedUIComposer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
