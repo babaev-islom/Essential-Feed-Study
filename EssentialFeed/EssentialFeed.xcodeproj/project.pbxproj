@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44100FAB28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */; };
 		4442DE1228A685D300FA294F /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442DE1128A685D300FA294F /* FeedUIIntegrationTests.swift */; };
 		4442DE1428A90A5300FA294F /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; };
 		4442DE1528A90A5300FA294F /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -128,6 +129,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		4442DE1128A685D300FA294F /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		4442DE1A28A9105F00FA294F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		444FBB0A28991EA500CE44D8 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				44F26BB828AB8DB900AA5DB9 /* FeedUIComposer.swift */,
+				44100FAA28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift */,
 			);
 			path = Composers;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				44EDC12C28AA83D4002B0416 /* UIView+Shimmering.swift in Sources */,
 				44F26BC628ABC90900AA5DB9 /* FeedViewModel.swift in Sources */,
 				44F26BC428ABC8F100AA5DB9 /* FeedLoadingViewModel.swift in Sources */,
+				44100FAB28AE2D1800BCE019 /* MainQueueDispatchDecorator.swift in Sources */,
 				44F26BA028AB866000AA5DB9 /* FeedImageDataLoader.swift in Sources */,
 				44F26BCC28ABD27700AA5DB9 /* UItableView+dequeueing.swift in Sources */,
 				44F26BC228ABBDD400AA5DB9 /* FeedImagePresenter.swift in Sources */,
