@@ -23,11 +23,8 @@ public final class FeedUIComposer {
         presentationAdapter.presenter = presenter
         return feedController
     }
-}
-
-
-private extension FeedUIComposer {
-    static func makeWith(delegate: FeedViewControllerDelegate, title: String) -> FeedViewController {
+    
+    private static func makeWith(delegate: FeedViewControllerDelegate, title: String) -> FeedViewController {
         let bundle = Bundle(for: FeedViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let feedController = storyboard.instantiateInitialViewController() as! FeedViewController
