@@ -8,7 +8,5 @@
 import UIKit
 
 final public class ErrorView {
-    public var message: String? {
-        nil
-    }
+    public var message: String?
 }
