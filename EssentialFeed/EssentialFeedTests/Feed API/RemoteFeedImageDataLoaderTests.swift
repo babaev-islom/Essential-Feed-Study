@@ -99,7 +99,7 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
     }
     
     func test_loadImageData_deliversDataOnClientSuccessWith200HTTPResponseWithNonEmptyData() {
-        let anyData = Data("any".utf8)
+        let anyData = anyData()
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWith: .success(anyData), when: {
