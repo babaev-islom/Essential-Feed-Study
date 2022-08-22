@@ -7,6 +7,9 @@
 
 import UIKit
 
-final public class ErrorView {
+final public class ErrorView: UIView {
     public var message: String?
+    
+    @IBOutlet private(set) var button: UIButton?
+    
 }
