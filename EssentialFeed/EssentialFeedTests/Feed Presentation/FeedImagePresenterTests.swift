@@ -46,7 +46,16 @@ final class FeedImagePresenter<View: FeedImageView, Image> where View.Image == I
     
     func didFinishLoadingImageData(with data: Data, for model: FeedImage) {
         guard let image = imageTransformer(data) else {
-            fatalError()
+            view.display(
+                FeedImageViewModel(
+                    location: model.location,
+                    description: model.description,
+                    image: nil,
+                    isLoading: false,
+                    shouldRetry: true
+                )
+            )
+            return
         }
 
         view.display(
@@ -97,6 +106,21 @@ final class FeedImagePresenterTests: XCTestCase {
             .display(image: anyImage),
             .display(isLoading: false),
             .display(shouldRetry: false)
+        ])
+    }
+    
+    func test_didFinishLoadingImageDataWithData_displaysNoImage_stopsLoading_andShouldRetry() {
+        let (sut, view) = makeSUT(imageTransformer: { _ in nil })
+        let model = uniqueImageFeed().models.first!
+        
+        sut.didFinishLoadingImageData(with: Data(), for: model)
+        
+        XCTAssertEqual(view.messages, [
+            .display(location: model.location),
+            .display(description: model.description),
+            .display(image: nil),
+            .display(isLoading: false),
+            .display(shouldRetry: true)
         ])
     }
     
