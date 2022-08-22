@@ -107,22 +107,15 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
         })
     }
     
-    func test_loadImageData_doesNotCancelTaskUponRequest() {
-        let (sut, client) = makeSUT()
-        
-        sut.loadImageData(from: anyURL()) { _ in }
-        
-        XCTAssertTrue(client.cancelledURLs.isEmpty)
-    }
-    
-    func test_loadImageData_cancelsImageDataLoadRequest() {
+    func test_cancelLoadImageDataURLTask_cancelsClientURLRequest() {
         let anyURL = anyURL()
         let (sut, client) = makeSUT()
         
         let task = sut.loadImageData(from: anyURL) { _ in }
+        XCTAssertTrue(client.cancelledURLs.isEmpty, "Expeceted no cancelled URL request until task is cancelled")
         
         task.cancel()
-        XCTAssertEqual(client.cancelledURLs, [anyURL])
+        XCTAssertEqual(client.cancelledURLs, [anyURL], "Expected cancelled URL request after task is cancelled")
     }
     
     func test_loadImageData_doesNotDeliverResultWhenSUTInstanceHasBeenDeallocated() {
