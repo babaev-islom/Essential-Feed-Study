@@ -288,7 +288,6 @@
 			children = (
 				444FBB0A28991EA500CE44D8 /* XCTestCase+MemoryLeakTracking.swift */,
 				44D75E0F289CF87400A9A209 /* SharedTestHelpers.swift */,
-				448C6BE428B3C04B00820349 /* HTTPClientSpy.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
