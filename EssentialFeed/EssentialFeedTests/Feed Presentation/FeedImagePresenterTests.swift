@@ -33,7 +33,7 @@ final class FeedImagePresenterTests: XCTestCase {
     }
     
     func test_didFinishLoadingImageDataWithData_displaysImageAndStopsLoading() {
-        let anyImage = UIImage()
+        let anyImage = "any image"
         let (sut, view) = makeSUT(imageTransformer: { _ in anyImage })
         let model = uniqueImageFeed().models.first!
         
@@ -80,7 +80,7 @@ final class FeedImagePresenterTests: XCTestCase {
     
     //MARK: - Helpers
     
-    private func makeSUT(imageTransformer: @escaping (Data) -> UIImage? = { _ in UIImage() }, file: StaticString = #filePath, line: UInt = #line) -> (sut: FeedImagePresenter<ViewSpy, UIImage>, view: ViewSpy) {
+    private func makeSUT(imageTransformer: @escaping (Data) -> String? = { _ in "" }, file: StaticString = #filePath, line: UInt = #line) -> (sut: FeedImagePresenter<ViewSpy, String>, view: ViewSpy) {
         let view = ViewSpy()
         let sut = FeedImagePresenter(view: view, imageTransformer: imageTransformer)
         trackForMemoryLeaks(view)
@@ -92,14 +92,14 @@ final class FeedImagePresenterTests: XCTestCase {
         enum Message: Hashable {
             case display(location: String?)
             case display(description: String?)
-            case display(image: UIImage?)
+            case display(image: String?)
             case display(isLoading: Bool)
             case display(shouldRetry: Bool)
         }
         
         private(set) var messages = Set<Message>()
         
-        func display(_ viewModel: FeedImageViewModel<UIImage>) {
+        func display(_ viewModel: FeedImageViewModel<String>) {
             messages.insert(.display(location: viewModel.location))
             messages.insert(.display(description: viewModel.description))
             messages.insert(.display(image: viewModel.image))
