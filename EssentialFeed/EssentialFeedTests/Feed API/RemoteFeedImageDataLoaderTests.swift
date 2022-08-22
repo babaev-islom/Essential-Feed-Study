@@ -28,10 +28,18 @@ final class RemoteFeedImageDataLoader {
         func cancel() {
         }
     }
+    
+    public enum Error: Swift.Error {
+        case connectivity
+    }
         
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
         _ = client.get(from: url) { result in
-            
+            switch result {
+            case .failure:
+                completion(.failure(Error.connectivity))
+            default: break
+            }
         }
         return Task()
     }
@@ -53,6 +61,24 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
         _ = sut.loadImageData(from: anyURL) { _ in }
         
         XCTAssertEqual(client.requestedURLs, [anyURL, anyURL])
+    }
+    
+    func test_loadImageData_deliversConnectivityErrorOnClientError() {
+        let (sut, client) = makeSUT()
+        let exp = expectation(description: "Wait for image data load")
+        
+        _ = sut.loadImageData(from: anyURL()) { result in
+            switch result {
+            case let .failure(error as RemoteFeedImageDataLoader.Error):
+                XCTAssertEqual(error, .connectivity)
+            default:
+                XCTFail("Expected to receive connectivity error, got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        client.complete(with: anyNSError())
+        
+        wait(for: [exp], timeout: 0.1)
     }
     
     //MARK: - Helpers
@@ -80,6 +106,10 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
         func get(from url: URL, completion: @escaping (HTTPLoader.Result) -> Void) -> HTTPLoaderTask {
             messages.append((url, completion))
             return TaskSpy()
+        }
+        
+        func complete(with error: NSError, at index: Int = 0) {
+            messages[index].completion(.failure(error))
         }
     }
 }
