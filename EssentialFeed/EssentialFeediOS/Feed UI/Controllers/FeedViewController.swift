@@ -15,6 +15,8 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
     
     var delegate: FeedViewControllerDelegate?
     
+    public let errorView = ErrorView()
+    
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
     }
