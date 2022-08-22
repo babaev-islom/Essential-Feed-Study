@@ -8,26 +8,18 @@
 import XCTest
 import EssentialFeed
 
-protocol HTTPLoaderTask {
-    func cancel()
-}
-
-protocol HTTPLoader {
-    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
-    func get(from url: URL, completion: @escaping (Result) -> Void) -> HTTPLoaderTask
-}
 
 final class RemoteFeedImageDataLoader {
-    private let client: HTTPLoader
+    private let client: HTTPClient
     
-    init(client: HTTPLoader) {
+    init(client: HTTPClient) {
         self.client = client
     }
     
     private struct Task: FeedImageDataLoaderTask {
-        private let wrapped: HTTPLoaderTask
+        private let wrapped: HTTPClientTask
         
-        init(_ wrapped: HTTPLoaderTask) {
+        init(_ wrapped: HTTPClientTask) {
             self.wrapped = wrapped
         }
         
@@ -179,15 +171,15 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
         wait(for: [exp], timeout: 0.1)
     }
     
-    private class HTTPClientSpy: HTTPLoader {
-        private var messages = [(url: URL, completion: (HTTPLoader.Result) -> Void)]()
+    private class HTTPClientSpy: HTTPClient {
+        private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
         var requestedURLs: [URL] {
             messages.map(\.url)
         }
         
         private(set) var cancelledURLs = [URL]()
         
-        private struct TaskSpy: HTTPLoaderTask {
+        private struct TaskSpy: HTTPClientTask {
             let callback: () -> Void
             
             func cancel() {
@@ -195,7 +187,7 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
             }
         }
         
-        func get(from url: URL, completion: @escaping (HTTPLoader.Result) -> Void) -> HTTPLoaderTask {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
             messages.append((url, completion))
             return TaskSpy { [weak self] in self?.cancelledURLs.append(url) }
         }
