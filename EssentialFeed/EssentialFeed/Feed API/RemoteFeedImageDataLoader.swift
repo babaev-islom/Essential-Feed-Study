@@ -14,38 +14,48 @@ public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
         self.client = client
     }
     
-    private struct Task: FeedImageDataLoaderTask {
-        private let wrapped: HTTPClientTask
+    private final class HTTPClientTaskWrapper: FeedImageDataLoaderTask {
+        var wrapped: HTTPClientTask?
         
-        init(_ wrapped: HTTPClientTask) {
-            self.wrapped = wrapped
+        private var completion: ((FeedImageDataLoader.Result) -> Void)?
+        
+        init(_ completion: @escaping ((FeedImageDataLoader.Result) -> Void)) {
+            self.completion = completion
+        }
+        
+        func complete(with result: FeedImageDataLoader.Result) {
+            completion?(result)
         }
         
         func cancel() {
-            wrapped.cancel()
+            preventFurtherCompletions()
+            wrapped?.cancel()
         }
+        
+        private func preventFurtherCompletions() {
+            completion = nil
+        }
+        
     }
     
     public enum Error: Swift.Error {
         case connectivity
         case invalidData
     }
-        
+    
     @discardableResult
     public func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        let task = client.get(from: url) { [weak self] result in
+        let task = HTTPClientTaskWrapper(completion)
+        task.wrapped = client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             
-            switch result {
-            case .failure:
-                completion(.failure(Error.connectivity))
-            case let .success((data, response)):
-                guard response.statusCode == 200, !data.isEmpty else {
-                    return completion(.failure(Error.invalidData))
-                }
-                completion(.success(data))
-            }
+            task.complete(with: result
+                            .mapError { _ in Error.connectivity }
+                            .flatMap { (data, response) in
+                                    let isValidResponse = response.statusCode == 200 && !data.isEmpty
+                                    return isValidResponse ? .success(data) : .failure(Error.invalidData) }
+            )
         }
-        return Task(task)
+        return task
     }
 }
