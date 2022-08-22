@@ -8,7 +8,6 @@
 import XCTest
 import EssentialFeed
 
-
 final class RemoteFeedImageDataLoaderTests: XCTestCase {
     
     func test_init_doesNotRequestImageDataLoad() {
