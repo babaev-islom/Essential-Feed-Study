@@ -39,10 +39,11 @@ final class RemoteFeedImageDataLoader {
             switch result {
             case .failure:
                 completion(.failure(Error.connectivity))
-            case let .success(_, response):
+            case let .success((data, response)):
                 guard response.statusCode == 200 else {
                     return completion(.failure(Error.invalidData))
                 }
+                completion(.success(data))
             }
         }
         return Task()
@@ -84,6 +85,25 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
                 client.complete(data: Data(), withStatusCode: code, at: index)
             })
         }
+    }
+    
+    func test_loadImageData_deliversDataOnClientSuccessWith200HTTPResponse() {
+        let anyData = Data("any".utf8)
+        let (sut, client) = makeSUT()
+        let exp = expectation(description: "Wait for load image data")
+        
+        _ = sut.loadImageData(from: anyURL()) { result in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, anyData)
+            default:
+                XCTFail("Expected to receive \(anyData), got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        client.complete(data: anyData, withStatusCode: 200)
+        
+        wait(for: [exp], timeout: 0.1)
     }
     
     //MARK: - Helpers
