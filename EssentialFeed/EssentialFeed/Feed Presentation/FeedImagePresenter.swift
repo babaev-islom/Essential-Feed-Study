@@ -7,20 +7,11 @@
 
 import Foundation
 
-public struct FeedImageViewModel<Image> {
-    public let location: String?
-    public let description: String?
-    public let image: Image?
-    public let isLoading: Bool
-    public let shouldRetry: Bool
-}
-
 public protocol FeedImageView {
     associatedtype Image
     
     func display(_ viewModel: FeedImageViewModel<Image>)
 }
-
 
 public final class FeedImagePresenter<View: FeedImageView, Image> where View.Image == Image {
     private let view: View
