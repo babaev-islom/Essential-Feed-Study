@@ -69,38 +69,18 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
     
     func test_loadImageData_deliversConnectivityErrorOnClientError() {
         let (sut, client) = makeSUT()
-        let exp = expectation(description: "Wait for image data load")
         
-        _ = sut.loadImageData(from: anyURL()) { result in
-            switch result {
-            case let .failure(error as RemoteFeedImageDataLoader.Error):
-                XCTAssertEqual(error, .connectivity)
-            default:
-                XCTFail("Expected to receive connectivity error, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        client.complete(with: anyNSError())
-        
-        wait(for: [exp], timeout: 0.1)
+        expect(sut, toCompleteWith: .connectivity, when: {
+            client.complete(with: anyNSError())
+        })
     }
     
     func test_loadImageData_deliversInvalidDataErrorOnClientSuccessWithNon200HTTPResponse() {
         let (sut, client) = makeSUT()
-        let exp = expectation(description: "Wait for image data load")
         
-        _ = sut.loadImageData(from: anyURL()) { result in
-            switch result {
-            case let .failure(error as RemoteFeedImageDataLoader.Error):
-                XCTAssertEqual(error, .invalidData)
-            default:
-                XCTFail("Expected to receive connectivity error, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        client.complete(data: Data(), withStatusCode: 400)
-        
-        wait(for: [exp], timeout: 0.1)
+        expect(sut, toCompleteWith: .invalidData, when: {
+            client.complete(data: Data(), withStatusCode: 400)
+        })
     }
     
     //MARK: - Helpers
@@ -111,6 +91,22 @@ final class RemoteFeedImageDataLoaderTests: XCTestCase {
         trackForMemoryLeaks(client, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, client)
+    }
+    
+    private func expect(_ sut: RemoteFeedImageDataLoader, toCompleteWith expectedError: RemoteFeedImageDataLoader.Error, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Wait for image data load")
+        
+        _ = sut.loadImageData(from: anyURL()) { result in
+            switch result {
+            case let .failure(receivedError as RemoteFeedImageDataLoader.Error):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            default:
+                XCTFail("Expected to receive connectivity error, got \(result) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        action()
+        wait(for: [exp], timeout: 0.1)
     }
     
     private class HTTPClientSpy: HTTPLoader {
