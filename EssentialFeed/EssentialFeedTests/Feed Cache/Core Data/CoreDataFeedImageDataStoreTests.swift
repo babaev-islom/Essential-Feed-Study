@@ -27,6 +27,16 @@ final class CoreDataFeedImageDataStoreTests: XCTestCase {
         expect(sut, toCompleteRetrievalWith: notFound(), for: nonMatchingURL)
     }
     
+    func test_retrieveImageData_deliversFoundDataWhenThereIsAStoredImageDataMatchingURL() {
+        let sut = makeSUT()
+        let storedData = anyData()
+        let matchingURL = URL(string: "http://a-url.com")!
+
+        insert(storedData, for: matchingURL, into: sut)
+
+        expect(sut, toCompleteRetrievalWith: found(storedData), for: matchingURL)
+    }
+    
     
     //MARK: - Helpers
     
@@ -44,6 +54,10 @@ final class CoreDataFeedImageDataStoreTests: XCTestCase {
     
     private func notFound() -> FeedImageDataStore.RetrievalResult {
         .success(.none)
+    }
+    
+    private func found(_ data: Data) -> FeedImageDataStore.RetrievalResult {
+        .success(data)
     }
     
     private func insert(_ data: Data, for url: URL, into sut: CoreDataFeedStore, file: StaticString = #filePath, line: UInt = #line) {
@@ -64,22 +78,21 @@ final class CoreDataFeedImageDataStoreTests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 2.0)
     }
     
-    private func expect(_ sut: CoreDataFeedStore, toCompleteRetrievalWith expectedResult: FeedImageDataStore.RetrievalResult, for url: URL, file: StaticString = #filePath, line: UInt = #line) {
-        let exp = expectation(description: "Wait for retrieval")
-        sut.retrieve(dataForURL: anyURL()) { result in
-            switch result {
-            case .success(.none): break
+    private func expect(_ sut: CoreDataFeedStore, toCompleteRetrievalWith expectedResult: FeedImageDataStore.RetrievalResult, for url: URL,  file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for load completion")
+        sut.retrieve(dataForURL: url) { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success( receivedData), .success(expectedData)):
+                XCTAssertEqual(receivedData, expectedData, file: file, line: line)
+                
             default:
-                XCTFail("Expected to receive no data, got \(result) instead")
+                XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
             }
             exp.fulfill()
         }
-        
         wait(for: [exp], timeout: 1.0)
     }
-    
-    
 }
