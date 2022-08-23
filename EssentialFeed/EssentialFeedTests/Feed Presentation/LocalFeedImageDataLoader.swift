@@ -35,8 +35,11 @@ final class LocalFeedImageDataLoader {
             switch result {
             case .failure:
                 completion(.failure(Error.failed))
-            case .success:
-                completion(.failure(Error.notFound))
+            case let .success(data):
+                guard let data = data else {
+                    return completion(.failure(Error.notFound))
+                }
+                completion(.success(data))
             }
         }
         
@@ -76,6 +79,15 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
         
         expect(sut, toCompleteWith: failure(.notFound), when: {
             store.complete(with: .none)
+        })
+    }
+    
+    func test_loadImageData_deliversStoreData() {
+        let foundData = anyData()
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: .success(foundData), when: {
+            store.complete(with: foundData)
         })
     }
     
