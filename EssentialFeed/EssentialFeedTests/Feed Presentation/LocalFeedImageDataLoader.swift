@@ -19,7 +19,13 @@ final class LocalFeedImageDataLoader {
     }
     
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        store.retrieve(dataForURL: url) { _ in }
+        store.retrieve(dataForURL: url) { result in
+            switch result {
+            case let .failure(error):
+                completion(.failure(error))
+            default: break
+            }
+        }
         
         return Task()
     }
@@ -43,6 +49,25 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
         XCTAssertEqual(store.messages, [.retrieve(dataFor: url), .retrieve(dataFor: url)])
     }
     
+    func test_loadImageData_deliversErrorOnStoreFailure() {
+        let anyNSError = anyNSError()
+        let (sut, store) = makeSUT()
+        let exp = expectation(description: "Wait for load image data")
+        
+        _ = sut.loadImageData(from: anyURL()) { result in
+            switch result {
+            case let .failure(error as NSError):
+                XCTAssertEqual(error, anyNSError)
+            default:
+                XCTFail("Expected to receive \(anyNSError), got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        store.completeRetrieval(with: anyNSError)
+        
+        wait(for: [exp], timeout: 0.1)
+    }
+    
     //MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedImageDataLoader, store: FeedImageStoreSpy) {
@@ -59,9 +84,15 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
         }
         
         private(set) var messages = [Message]()
+        private var retrievalRequests = [(url: URL, completion: (Result<Data,Error>) -> Void)]()
         
         func retrieve(dataForURL url: URL, completion: @escaping (Result<Data,Error>) -> Void) {
             messages.append(.retrieve(dataFor: url))
+            retrievalRequests.append((url, completion))
+        }
+        
+        func completeRetrieval(with error: Error, at index: Int = 0) {
+            retrievalRequests[index].completion(.failure(error))
         }
     }
 }
