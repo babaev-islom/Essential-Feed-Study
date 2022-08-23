@@ -26,7 +26,20 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         XCTAssertEqual(store.messages, [.insert(data: data, for: url)])
     }
     
+    func test_saveImageDataForURL_failsOnStoreFailure() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: failed(), when: {
+            let insertionError = anyNSError()
+            store.completeInsertion(with: insertionError)
+        })
+    }
+    
     //MARK: - Helpers
+    
+    private func failed() -> FeedImageDataStore.InsertionResult {
+        .failure(LocalFeedImageDataLoader.SaveError.failed)
+    }
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedImageDataLoader, store: FeedImageDataStoreSpy) {
         let store = FeedImageDataStoreSpy()
@@ -34,5 +47,27 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
+    }
+    
+    private func expect(_ sut: LocalFeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataStore.InsertionResult, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Wait for insertion")
+        
+        sut.save(anyData(), for: anyURL()) { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.failure(receivedError as LocalFeedImageDataLoader.SaveError), .failure(expectedError as LocalFeedImageDataLoader.SaveError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            
+            case (.success, .success):
+                break
+                
+            default:
+                XCTFail("Expected to receive \(expectedResult), got \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+
+        action()
+        
+        wait(for: [exp], timeout: 0.1)
     }
 }
