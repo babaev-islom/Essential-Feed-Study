@@ -88,7 +88,6 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         task.cancel()
         
         primaryLoader.completeSuccessfully()
-        
         XCTAssertTrue(receivedResults.isEmpty)
     }
     
@@ -103,7 +102,6 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         task.cancel()
         
         fallbackLoader.completeSuccessfully()
-        
         XCTAssertTrue(receivedResults.isEmpty)
     }
     
