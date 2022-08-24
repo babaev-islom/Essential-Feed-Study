@@ -10,13 +10,22 @@ import EssentialFeed
 
 final class FeedImageDataLoaderWithFallback: FeedImageDataLoader {
     private let primary: FeedImageDataLoader
+    private let fallback: FeedImageDataLoader
     
     init(primary: FeedImageDataLoader, fallback: FeedImageDataLoader) {
         self.primary = primary
+        self.fallback = fallback
     }
     
     func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        let task = primary.loadImageData(from: url, completion: completion)
+        let task = primary.loadImageData(from: url) { [weak self] result in
+            switch result {
+            case .success:
+                completion(result)
+            case .failure:
+                _ = self?.fallback.loadImageData(from: url, completion: completion)
+            }
+        }
         return task
     }
 }
@@ -43,8 +52,32 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    func test_loadImageData_deliversFallbackImageDataOnPrimaryLoaderFailure() {
+        let fallbackData = Data("primary".utf8)
+        let primaryLoader = ImageLoaderStub(.failure(anyNSError()))
+        let fallbackLoader = ImageLoaderStub(.success(fallbackData))
+        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        
+        let exp = expectation(description: "Wait for image data load")
+        _ = sut.loadImageData(from: anyURL()) { result in
+            switch result {
+            case let .success(data):
+                XCTAssertEqual(data, fallbackData)
+            default:
+                XCTFail("Expected to suceed with \(fallbackData), got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     private func anyURL() -> URL {
         URL(string: "http://any-url.com")!
+    }
+    
+    private func anyNSError() -> NSError {
+        NSError(domain: "any error", code: 0)
     }
     
     private class ImageLoaderStub: FeedImageDataLoader {
