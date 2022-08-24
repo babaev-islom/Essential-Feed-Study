@@ -34,10 +34,8 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     func test_loadImageData_deliversPrimaryImageOnPrimaryLoaderSuccess() {
         let primaryData = Data("primary".utf8)
         let fallbackData = Data("primary".utf8)
-        let primaryLoader = ImageLoaderStub(.success(primaryData))
-        let fallbackLoader = ImageLoaderStub(.success(fallbackData))
-        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
-        
+        let sut = makeSUT(primaryResult: .success(primaryData), fallbackResult: .success(fallbackData))
+
         let exp = expectation(description: "Wait for image data load")
         _ = sut.loadImageData(from: anyURL()) { result in
             switch result {
@@ -54,9 +52,7 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     
     func test_loadImageData_deliversFallbackImageDataOnPrimaryLoaderFailure() {
         let fallbackData = Data("primary".utf8)
-        let primaryLoader = ImageLoaderStub(.failure(anyNSError()))
-        let fallbackLoader = ImageLoaderStub(.success(fallbackData))
-        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackData))
         
         let exp = expectation(description: "Wait for image data load")
         _ = sut.loadImageData(from: anyURL()) { result in
@@ -70,6 +66,24 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    //MARK: - Helpers
+    
+    private func makeSUT(primaryResult: FeedImageDataLoader.Result, fallbackResult: FeedImageDataLoader.Result, file: StaticString = #filePath, line: UInt = #line) -> FeedImageDataLoaderWithFallback {
+        let primaryLoader = ImageLoaderStub(primaryResult)
+        let fallbackLoader = ImageLoaderStub(fallbackResult)
+        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        trackForMemoryLeaks(primaryLoader, file: file, line: line)
+        trackForMemoryLeaks(fallbackLoader, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak", file: file, line: line)
+        }
     }
     
     private func anyURL() -> URL {
