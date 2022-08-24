@@ -36,36 +36,14 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         let fallbackData = Data("primary".utf8)
         let sut = makeSUT(primaryResult: .success(primaryData), fallbackResult: .success(fallbackData))
 
-        let exp = expectation(description: "Wait for image data load")
-        _ = sut.loadImageData(from: anyURL()) { result in
-            switch result {
-            case let .success(data):
-                XCTAssertEqual(data, primaryData)
-            default:
-                XCTFail("Expected to suceed with \(primaryData), got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toCompleteWith: .success(primaryData))
     }
     
     func test_loadImageData_deliversFallbackImageDataOnPrimaryLoaderFailure() {
         let fallbackData = Data("primary".utf8)
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackData))
         
-        let exp = expectation(description: "Wait for image data load")
-        _ = sut.loadImageData(from: anyURL()) { result in
-            switch result {
-            case let .success(data):
-                XCTAssertEqual(data, fallbackData)
-            default:
-                XCTFail("Expected to suceed with \(fallbackData), got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toCompleteWith: .success(fallbackData))
     }
     
     //MARK: - Helpers
@@ -78,6 +56,24 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         trackForMemoryLeaks(fallbackLoader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func expect(_ sut: FeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Wait for image data load")
+        _ = sut.loadImageData(from: anyURL()) { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedData), .success(expectedData)):
+                XCTAssertEqual(receivedData, expectedData, file: file, line: line)
+                
+            case (.failure, .failure):
+                break
+                
+            default:
+                XCTFail("Expected to receive \(expectedResult), got \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
