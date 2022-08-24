@@ -47,7 +47,9 @@ final class FeedImageDataLoaderWithFallback: FeedImageDataLoader {
             case .success:
                 task.complete(with: result)
             case .failure:
-                _ = self?.fallback.loadImageData(from: url, completion: completion)
+                task.wrapped = self?.fallback.loadImageData(from: url) { result in
+                    task.complete(with: result)
+                }
             }
         }
         return task
@@ -86,6 +88,21 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         task.cancel()
         
         primaryLoader.completeSuccessfully()
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_cancelLoadImageData_withPrimaryLoaderFailureCancelsFallbackLoaderTask() {
+        let primaryLoader = ImageLoaderSpy()
+        let fallbackLoader = ImageLoaderSpy()
+        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        
+        var receivedResults = [FeedImageDataLoader.Result]()
+        let task = sut.loadImageData(from: anyURL()) { receivedResults.append($0)}
+        primaryLoader.completeWithFailure()
+        task.cancel()
+        
+        fallbackLoader.completeSuccessfully()
         
         XCTAssertTrue(receivedResults.isEmpty)
     }
@@ -173,6 +190,11 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
         func completeSuccessfully(at index: Int = 0) {
             let anyData = Data("any".utf8)
             completions[index](.success(anyData))
+        }
+        
+        func completeWithFailure(at index: Int = 0) {
+            let error = NSError(domain: "any", code: 0)
+            completions[index](.failure(error))
         }
     }
 }
