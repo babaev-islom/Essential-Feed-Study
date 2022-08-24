@@ -7,54 +7,7 @@
 
 import XCTest
 import EssentialFeed
-
-final class FeedImageDataLoaderWithFallback: FeedImageDataLoader {
-    private let primary: FeedImageDataLoader
-    private let fallback: FeedImageDataLoader
-    
-    init(primary: FeedImageDataLoader, fallback: FeedImageDataLoader) {
-        self.primary = primary
-        self.fallback = fallback
-    }
-    
-    private final class TaskWrapper: FeedImageDataLoaderTask {
-        private var completion: ((FeedImageDataLoader.Result) -> Void)?
-        
-        init(_ completion: @escaping (FeedImageDataLoader.Result) -> Void) {
-            self.completion = completion
-        }
-        
-        var wrapped: FeedImageDataLoaderTask?
-        
-        func complete(with result: FeedImageDataLoader.Result) {
-            completion?(result)
-        }
-        
-        func cancel() {
-            wrapped?.cancel()
-            preventFurtherCompletions()
-        }
-        
-        private func preventFurtherCompletions() {
-            completion = nil
-        }
-    }
-    
-    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        let task = TaskWrapper(completion)
-        task.wrapped = primary.loadImageData(from: url) { [weak self] result in
-            switch result {
-            case .success:
-                task.complete(with: result)
-            case .failure:
-                task.wrapped = self?.fallback.loadImageData(from: url) { result in
-                    task.complete(with: result)
-                }
-            }
-        }
-        return task
-    }
-}
+import EssentialApp
 
 final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     func test_loadImageData_deliversPrimaryImageOnPrimaryLoaderSuccess() {
@@ -81,7 +34,7 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     func test_cancelLoadImageData_cancelsPrimaryLoaderTask() {
         let primaryLoader = ImageLoaderSpy()
         let fallbackLoader = ImageLoaderSpy()
-        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        let sut = FeedImageDataLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
         
         var receivedResults = [FeedImageDataLoader.Result]()
         let task = sut.loadImageData(from: anyURL()) { receivedResults.append($0)}
@@ -94,7 +47,7 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     func test_cancelLoadImageData_withPrimaryLoaderFailureCancelsFallbackLoaderTask() {
         let primaryLoader = ImageLoaderSpy()
         let fallbackLoader = ImageLoaderSpy()
-        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        let sut = FeedImageDataLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
         
         var receivedResults = [FeedImageDataLoader.Result]()
         let task = sut.loadImageData(from: anyURL()) { receivedResults.append($0)}
@@ -107,10 +60,10 @@ final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
     
     //MARK: - Helpers
     
-    private func makeSUT(primaryResult: FeedImageDataLoader.Result, fallbackResult: FeedImageDataLoader.Result, file: StaticString = #filePath, line: UInt = #line) -> FeedImageDataLoaderWithFallback {
+    private func makeSUT(primaryResult: FeedImageDataLoader.Result, fallbackResult: FeedImageDataLoader.Result, file: StaticString = #filePath, line: UInt = #line) -> FeedImageDataLoaderWithFallbackComposite {
         let primaryLoader = ImageLoaderStub(primaryResult)
         let fallbackLoader = ImageLoaderStub(fallbackResult)
-        let sut = FeedImageDataLoaderWithFallback(primary: primaryLoader, fallback: fallbackLoader)
+        let sut = FeedImageDataLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
         trackForMemoryLeaks(primaryLoader, file: file, line: line)
         trackForMemoryLeaks(fallbackLoader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
