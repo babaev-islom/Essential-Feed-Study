@@ -131,8 +131,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         }
         
         func completeWithFailure(at index: Int = 0) {
-            let error = NSError(domain: "any", code: 0)
-            completions[index](.failure(error))
+            completions[index](.failure(anyNSError()))
         }
     }
 }
