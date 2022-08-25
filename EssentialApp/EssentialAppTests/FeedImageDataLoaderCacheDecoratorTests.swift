@@ -99,10 +99,6 @@ final class FeedImageDataLoaderCacheDecoratorTests: XCTestCase {
         wait(for: [exp], timeout: 0.1)
     }
     
-    private func anyData() -> Data {
-        Data("any".utf8)
-    }
-    
     private class CacheSpy: FeedImageDataCache {
         private(set) var messages = [Message]()
         

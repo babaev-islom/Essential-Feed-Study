@@ -127,8 +127,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         }
         
         func completeSuccessfully(at index: Int = 0) {
-            let anyData = Data("any".utf8)
-            completions[index](.success(anyData))
+            completions[index](.success(anyData()))
         }
         
         func completeWithFailure(at index: Int = 0) {
