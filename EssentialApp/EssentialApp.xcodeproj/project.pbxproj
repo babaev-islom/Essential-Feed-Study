@@ -156,8 +156,8 @@
 			children = (
 				4428D76328B79E0700E9E7E7 /* Helpers */,
 				44E238E128B63AF700E94B8A /* FeedLoaderWithFallbackCompositeTests.swift */,
-				4428D76128B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift */,
 				44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */,
+				4428D76128B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift */,
 			);
 			path = EssentialAppTests;
 			sourceTree = "<group>";
