@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4428D76228B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4428D76128B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift */; };
 		44E238B928B5FFCE00E94B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238B828B5FFCE00E94B8A /* AppDelegate.swift */; };
 		44E238BB28B5FFCE00E94B8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */; };
 		44E238BD28B5FFCE00E94B8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238BC28B5FFCE00E94B8A /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4428D76128B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderCacheDecoratorTests.swift; sourceTree = "<group>"; };
 		44E238B528B5FFCE00E94B8A /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E238B828B5FFCE00E94B8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				44E238E128B63AF700E94B8A /* FeedLoaderWithFallbackCompositeTests.swift */,
+				4428D76128B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift */,
 				44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */,
 			);
 			path = EssentialAppTests;
@@ -254,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4428D76228B79AEF00E9E7E7 /* FeedLoaderCacheDecoratorTests.swift in Sources */,
 				44E238E628B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */,
 				44E238E228B63AF700E94B8A /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 			);
@@ -340,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -395,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
