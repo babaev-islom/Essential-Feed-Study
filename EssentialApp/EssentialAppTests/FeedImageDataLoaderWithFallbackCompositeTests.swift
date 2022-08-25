@@ -1,5 +1,5 @@
 //
-//  FeedImageDataLoaderWithFallbackTests.swift
+//  FeedImageDataLoaderWithFallbackCompositeTests.swift
 //  EssentialAppTests
 //
 //  Created by Islom Babaev on 24/08/22.
@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 import EssentialApp
 
-final class FeedImageDataLoaderWithFallbackTests: XCTestCase {
+final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     func test_loadImageData_deliversPrimaryImageOnPrimaryLoaderSuccess() {
         let primaryData = Data("primary".utf8)
         let fallbackData = Data("primary".utf8)
