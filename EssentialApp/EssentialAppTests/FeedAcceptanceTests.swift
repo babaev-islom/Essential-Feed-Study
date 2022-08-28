@@ -38,6 +38,22 @@ final class FeedAcceptanceTests: XCTestCase {
         XCTAssertEqual(feed.numberOfRenderedImageViews(), 0)
     }
     
+    func test_onEnteringBackground_deletesExpiredFeedCache() {
+        let store = InMemoryFeedStore.withExpiredFeedCache
+        
+        enterBackground(with: store)
+        
+        XCTAssertNil(store.feedCache, "Expected to delete expired cache")
+    }
+    
+    func test_onEnteringBackground_keepsNonExpiredFeedCache() {
+        let store = InMemoryFeedStore.withNonExpiredFeedCache
+        
+        enterBackground(with: store)
+        
+        XCTAssertNotNil(store.feedCache, "Expected to keep non-expired cache")
+    }
+    
     //MARK: - Helpers
     
     private func launch(httpClient: HTTPClientStub = .offline, store: InMemoryFeedStore = .empty) -> FeedViewController {
@@ -47,6 +63,11 @@ final class FeedAcceptanceTests: XCTestCase {
         
         let nav = sut.window?.rootViewController as? UINavigationController
         return nav?.topViewController as! FeedViewController
+    }
+    
+    private func enterBackground(with store: InMemoryFeedStore) {
+        let sut = SceneDelegate(httpClient: HTTPClientStub.offline, store: store)
+        sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
     }
     
     private func response(for url: URL) -> (Data, HTTPURLResponse) {
@@ -103,6 +124,18 @@ final class FeedAcceptanceTests: XCTestCase {
     private class InMemoryFeedStore: FeedStore, FeedImageDataStore {
         static var empty: InMemoryFeedStore { InMemoryFeedStore() }
         
+        static var withNonExpiredFeedCache: InMemoryFeedStore {
+            return InMemoryFeedStore(feedCache: CachedFeed(feed: [], timestamp: Date()))
+        }
+        
+        static var withExpiredFeedCache: InMemoryFeedStore {
+            return InMemoryFeedStore(feedCache: CachedFeed(feed: [], timestamp: Date.distantPast))
+        }
+        
+        private init(feedCache: CachedFeed? = nil) {
+            self.feedCache = feedCache
+        }
+        
         var feedCache: CachedFeed?
         var feedImageDataCache: [URL: Data] = [:]
         
@@ -128,7 +161,5 @@ final class FeedAcceptanceTests: XCTestCase {
             feedImageDataCache[url] = data
             completion(.success(()))
         }
-        
-        
     }
 }
