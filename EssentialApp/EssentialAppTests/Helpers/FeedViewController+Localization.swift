@@ -1,5 +1,5 @@
 //
-//  FeedVIewController+Localization.swift
+//  FeedViewController+Localization.swift
 //  EssentialFeediOSTests
 //
 //  Created by Islom Babaev on 16/08/22.

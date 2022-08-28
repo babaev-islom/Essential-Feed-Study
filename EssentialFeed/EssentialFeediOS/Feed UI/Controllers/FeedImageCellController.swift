@@ -8,13 +8,13 @@
 import UIKit
 import EssentialFeed
 
-final class FeedImageCellController: FeedImageView {
+public final class FeedImageCellController: FeedImageView {
     private var cell: FeedImageCell?
     
     private let loadImageData: () -> Void
     private let cancelImageDataLoad: () -> Void
     
-    init(loadImageData: @escaping () -> Void, cancelImageDataLoad: @escaping () -> Void) {
+    public init(loadImageData: @escaping () -> Void, cancelImageDataLoad: @escaping () -> Void) {
         self.loadImageData = loadImageData
         self.cancelImageDataLoad = cancelImageDataLoad
     }
@@ -25,7 +25,7 @@ final class FeedImageCellController: FeedImageView {
         return cell!
     }
     
-    func display(_ viewModel: FeedImageViewModel<UIImage>) {
+    public func display(_ viewModel: FeedImageViewModel<UIImage>) {
         cell?.locationContainer.isHidden = !viewModel.hasLocation
         cell?.locationLabel.text = viewModel.location
         cell?.descriptionLabel.text = viewModel.description
