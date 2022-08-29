@@ -42,6 +42,7 @@
 		44E238E428B6476300E94B8A /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238E328B6476300E94B8A /* FeedLoaderWithFallbackComposite.swift */; };
 		44E238E628B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		44E238E828B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238E728B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift */; };
+		44EA2AD228BCD49900A1EB54 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		44E238E328B6476300E94B8A /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		44E238E728B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			children = (
 				44E238B828B5FFCE00E94B8A /* AppDelegate.swift */,
 				44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */,
+				44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */,
 				444307A428BB57B30086F483 /* FeedUIComposer.swift */,
 				444307A528BB57B30086F483 /* FeedLoaderPresentationAdapter.swift */,
 				444307A628BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift */,
@@ -319,6 +322,7 @@
 				444307A928BB57B40086F483 /* FeedViewAdapter.swift in Sources */,
 				4428D77028B7A40B00E9E7E7 /* FeedLoaderCacheDecorator.swift in Sources */,
 				44E238BB28B5FFCE00E94B8A /* SceneDelegate.swift in Sources */,
+				44EA2AD228BCD49900A1EB54 /* CombineHelpers.swift in Sources */,
 				444307AA28BB57B40086F483 /* FeedUIComposer.swift in Sources */,
 				44E238E828B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 				444307AC28BB57B40086F483 /* WeakRefVirtualProxy.swift in Sources */,
