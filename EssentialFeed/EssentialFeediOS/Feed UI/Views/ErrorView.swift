@@ -19,6 +19,7 @@ final public class ErrorView: UIView {
         super.awakeFromNib()
         
         button?.setTitle(nil, for: .normal)
+        button?.titleLabel?.numberOfLines = 0
         alpha = 0
     }
     
