@@ -28,6 +28,7 @@
 		444FBB152899544600CE44D8 /* EssentialFeedAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FBB142899544600CE44D8 /* EssentialFeedAPIEndToEndTests.swift */; };
 		444FBB162899544600CE44D8 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; };
 		444FBB1C289957D300CE44D8 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FBB0A28991EA500CE44D8 /* XCTestCase+MemoryLeakTracking.swift */; };
+		4454BBDC28BC9811008400C4 /* UITableView+HeaderSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4454BBDB28BC9811008400C4 /* UITableView+HeaderSizing.swift */; };
 		445EFD0B28A37706001AE8F7 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EFD0A28A37706001AE8F7 /* CoreDataHelpers.swift */; };
 		445EFD0D28A37739001AE8F7 /* ManagedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EFD0C28A37739001AE8F7 /* ManagedCache.swift */; };
 		445EFD0F28A3774A001AE8F7 /* ManagedFeedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445EFD0E28A3774A001AE8F7 /* ManagedFeedImage.swift */; };
@@ -161,6 +162,7 @@
 		444FBB0C2899390300CE44D8 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		444FBB122899544600CE44D8 /* EssentialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		444FBB142899544600CE44D8 /* EssentialFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
+		4454BBDB28BC9811008400C4 /* UITableView+HeaderSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+HeaderSizing.swift"; sourceTree = "<group>"; };
 		445EFD0A28A37706001AE8F7 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		445EFD0C28A37739001AE8F7 /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
 		445EFD0E28A3774A001AE8F7 /* ManagedFeedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFeedImage.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				44F26BCB28ABD27700AA5DB9 /* UItableView+dequeueing.swift */,
 				44F26BCD28ABD33300AA5DB9 /* UIImageView+animations.swift */,
 				448C6BC328B362F200820349 /* UIRefreshControl+Helpers.swift */,
+				4454BBDB28BC9811008400C4 /* UITableView+HeaderSizing.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4454BBDC28BC9811008400C4 /* UITableView+HeaderSizing.swift in Sources */,
 				448C6BC428B362F200820349 /* UIRefreshControl+Helpers.swift in Sources */,
 				44F26BCE28ABD33300AA5DB9 /* UIImageView+animations.swift in Sources */,
 				44EDC12C28AA83D4002B0416 /* UIView+Shimmering.swift in Sources */,
