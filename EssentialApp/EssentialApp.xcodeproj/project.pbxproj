@@ -169,14 +169,14 @@
 		44E238B728B5FFCE00E94B8A /* EssentialApp */ = {
 			isa = PBXGroup;
 			children = (
+				44E238B828B5FFCE00E94B8A /* AppDelegate.swift */,
+				44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */,
 				444307A428BB57B30086F483 /* FeedUIComposer.swift */,
 				444307A528BB57B30086F483 /* FeedLoaderPresentationAdapter.swift */,
 				444307A628BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift */,
 				444307A728BB57B40086F483 /* FeedViewAdapter.swift */,
 				444307A228BB57B30086F483 /* WeakRefVirtualProxy.swift */,
 				444307A328BB57B30086F483 /* MainQueueDispatchDecorator.swift */,
-				44E238B828B5FFCE00E94B8A /* AppDelegate.swift */,
-				44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */,
 				44E238BC28B5FFCE00E94B8A /* ViewController.swift */,
 				44E238E728B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift */,
 				44E238E328B6476300E94B8A /* FeedLoaderWithFallbackComposite.swift */,
