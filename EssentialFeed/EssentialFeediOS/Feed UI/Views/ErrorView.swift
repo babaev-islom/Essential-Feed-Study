@@ -13,7 +13,7 @@ final public class ErrorView: UIView {
         set { setMessageAnimated(newValue) }
     }
     
-    @IBOutlet private(set) var button: UIButton?
+    @IBOutlet private(set) public var button: UIButton?
     
     public override func awakeFromNib() {
         super.awakeFromNib()
