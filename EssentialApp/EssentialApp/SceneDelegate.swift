@@ -19,12 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
     
-    private lazy var remoteFeedLoader: RemoteLoader<[FeedImage]> = {
-        RemoteLoader(
-            url: URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!,
-            client: httpClient,
-            mapper: FeedItemsMapper.map
-        )
+    private lazy var remoteFeedLoader: () -> FeedLoader.Publisher = {
+        return { [httpClient] in
+            httpClient
+                .getPublisher(url: URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!)
+                .tryMap(FeedItemsMapper.map)
+                .eraseToAnyPublisher()
+        }
     }()
     
     private lazy var store: FeedStore & FeedImageDataStore = {
@@ -70,7 +71,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
-        return remoteFeedLoader.loadPublisher()
+        return remoteFeedLoader()
                 .caching(to: localFeedLoader)
                 .fallback(to: localFeedLoader.loadPublisher)
     }
