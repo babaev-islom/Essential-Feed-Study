@@ -334,6 +334,23 @@
 			path = "Shared API Infra";
 			sourceTree = "<group>";
 		};
+		442F80E828C3A98200339D11 /* Image Comments API */ = {
+			isa = PBXGroup;
+			children = (
+				442F80DE28C3A41600339D11 /* ImageCommentsMapper.swift */,
+				442F80DC28C3A3C700339D11 /* RemoteImageCommentsLoader.swift */,
+			);
+			path = "Image Comments API";
+			sourceTree = "<group>";
+		};
+		442F80E928C3A9A200339D11 /* Image Comments API */ = {
+			isa = PBXGroup;
+			children = (
+				442F80DA28C3A34300339D11 /* LoadImageCommentsFromRemoteUseCaseTests.swift */,
+			);
+			path = "Image Comments API";
+			sourceTree = "<group>";
+		};
 		4442DE1328A90A5300FA294F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,11 +525,12 @@
 			children = (
 				442F80E328C3A8FD00339D11 /* Shared API */,
 				442F80E428C3A90C00339D11 /* Shared API Infra */,
-				442F80E028C3A64200339D11 /* Image Comments Feature */,
 				44CA46BD2892D98E00A083FE /* Feed Feature */,
 				44FCAC7B2897D21300293E68 /* Feed API */,
 				44E610DC289AB23D00E60693 /* Feed Cache */,
 				448C6BCF28B36C1100820349 /* Feed Presentation */,
+				442F80E028C3A64200339D11 /* Image Comments Feature */,
+				442F80E828C3A98200339D11 /* Image Comments API */,
 			);
 			path = EssentialFeed;
 			sourceTree = "<group>";
@@ -526,6 +544,7 @@
 				44E610D9289AA59900E60693 /* Feed Cache */,
 				44FCAC822898004E00293E68 /* Feed API */,
 				448C6BC528B3640E00820349 /* Feed Presentation */,
+				442F80E928C3A9A200339D11 /* Image Comments API */,
 			);
 			path = EssentialFeedTests;
 			sourceTree = "<group>";
@@ -628,8 +647,6 @@
 				44FCAC802897F64B00293E68 /* FeedItemsMapper.swift */,
 				44C9720B289BE8DE00B6334F /* RemoteFeedItem.swift */,
 				448C6BE628B3C0BF00820349 /* RemoteFeedImageDataLoader.swift */,
-				442F80DE28C3A41600339D11 /* ImageCommentsMapper.swift */,
-				442F80DC28C3A3C700339D11 /* RemoteImageCommentsLoader.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -638,7 +655,6 @@
 			isa = PBXGroup;
 			children = (
 				44FCAC792897CB5400293E68 /* LoadFeedFromRemoteUseCaseTests.swift */,
-				442F80DA28C3A34300339D11 /* LoadImageCommentsFromRemoteUseCaseTests.swift */,
 				448C6BE228B39C5900820349 /* LoadFeedImageDataFromRemoteUseCaseTests.swift */,
 			);
 			path = "Feed API";
