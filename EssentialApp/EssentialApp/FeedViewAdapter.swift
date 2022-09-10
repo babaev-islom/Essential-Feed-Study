@@ -36,7 +36,7 @@ final class FeedViewAdapter: ResourceView {
                 mapper: Self.mapImage(_:)
             )
             adapter.presenter = presenter
-            return view
+            return CellController(view)
         })
     }
     
