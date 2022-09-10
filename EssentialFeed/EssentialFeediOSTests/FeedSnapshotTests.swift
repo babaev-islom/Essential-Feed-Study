@@ -10,15 +10,7 @@ import EssentialFeediOS
 @testable import EssentialFeed
 
 final class FeedSnapshotTests: XCTestCase {
-    func test_emptyFeed() {
-        let sut = makeSUT()
-        
-        sut.display(emptyFeed())
-        
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EMPTY_FEED_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EMPTY_FEED_dark")
-    }
-    
+
     func test_feedWithContent() {
         let sut = makeSUT()
         
@@ -28,14 +20,7 @@ final class FeedSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "FEED_WITH_CONTENT_dark")
     }
     
-    func test_feedWithErrorMessage() {
-        let sut = makeSUT()
-        
-        sut.display(.error(message: "This is a\nmulti-line\nerror message"))
-        
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "FEED_WITH_ERROR_MESSAGE_light")
-        assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "FEED_WITH_ERROR_MESSAGE_dark")
-    }
+    
     
     func test_feedWithFailedImageLoader() {
         let sut = makeSUT()
@@ -55,10 +40,6 @@ final class FeedSnapshotTests: XCTestCase {
         controller.tableView.showsHorizontalScrollIndicator = false
         controller.loadViewIfNeeded()
         return controller
-    }
-    
-    private func emptyFeed() -> [FeedImageCellController] {
-        return []
     }
     
     private func feedWithContent() -> [ImageStub] {
@@ -93,7 +74,7 @@ final class FeedSnapshotTests: XCTestCase {
         ]
     }
     
-    private func assert(snapshot: UIImage, named name: String, file: StaticString = #filePath, line: UInt = #line) {
+    func assert(snapshot: UIImage, named name: String, file: StaticString = #filePath, line: UInt = #line) {
         let snapshotURL = makeSnapshotURL(named: name, file: file)
         let snapshotData = makeSnapshotdata(for: snapshot, file: file, line: line)
 
