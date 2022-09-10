@@ -33,7 +33,7 @@ public final class FeedUIComposer {
             mapper: FeedPresenter.map
         )
         
-        presentationAdapter.presenter = presenter
+        presentationAdapter.presenter = presenter
         return feedController
     }
     
