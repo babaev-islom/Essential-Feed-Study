@@ -21,7 +21,7 @@
 		444307AA28BB57B40086F483 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307A428BB57B30086F483 /* FeedUIComposer.swift */; };
 		444307AB28BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307A628BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift */; };
 		444307AC28BB57B40086F483 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307A228BB57B30086F483 /* WeakRefVirtualProxy.swift */; };
-		444307AD28BB57B40086F483 /* FeedLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307A528BB57B30086F483 /* FeedLoaderPresentationAdapter.swift */; };
+		444307AD28BB57B40086F483 /* LoadResourcePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307A528BB57B30086F483 /* LoadResourcePresentationAdapter.swift */; };
 		444307B428BB57C70086F483 /* UIRefreshControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307B128BB57C70086F483 /* UIRefreshControl+TestHelpers.swift */; };
 		444307B528BB57C70086F483 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307AE28BB57C70086F483 /* UIButton+TestHelpers.swift */; };
 		444307B628BB57C70086F483 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444307AF28BB57C70086F483 /* UIImage+TestHelpers.swift */; };
@@ -83,7 +83,7 @@
 		444307A228BB57B30086F483 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		444307A328BB57B30086F483 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		444307A428BB57B30086F483 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
-		444307A528BB57B30086F483 /* FeedLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		444307A528BB57B30086F483 /* LoadResourcePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresentationAdapter.swift; sourceTree = "<group>"; };
 		444307A628BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		444307A728BB57B40086F483 /* FeedViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
 		444307AE28BB57C70086F483 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 				44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */,
 				44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */,
 				444307A428BB57B30086F483 /* FeedUIComposer.swift */,
-				444307A528BB57B30086F483 /* FeedLoaderPresentationAdapter.swift */,
+				444307A528BB57B30086F483 /* LoadResourcePresentationAdapter.swift */,
 				444307A628BB57B40086F483 /* FeedImageDataLoaderPresentationAdapter.swift */,
 				444307A728BB57B40086F483 /* FeedViewAdapter.swift */,
 				444307A228BB57B30086F483 /* WeakRefVirtualProxy.swift */,
@@ -326,7 +326,7 @@
 				444307AA28BB57B40086F483 /* FeedUIComposer.swift in Sources */,
 				44E238E828B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 				444307AC28BB57B40086F483 /* WeakRefVirtualProxy.swift in Sources */,
-				444307AD28BB57B40086F483 /* FeedLoaderPresentationAdapter.swift in Sources */,
+				444307AD28BB57B40086F483 /* LoadResourcePresentationAdapter.swift in Sources */,
 				4428D77628B7AA3600E9E7E7 /* FeedImageDataLoaderCacheDecorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
