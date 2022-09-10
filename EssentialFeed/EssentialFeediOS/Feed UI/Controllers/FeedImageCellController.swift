@@ -8,16 +8,16 @@
 import UIKit
 import EssentialFeed
 
-public final class FeedImageCellController: FeedImageView, ResourceView, ResourceLoadingView, ResourceErrorView {
+public final class FeedImageCellController: ResourceView, ResourceLoadingView, ResourceErrorView {
     public typealias ResourceViewModel = UIImage
     
-    private let viewModel: FeedImageViewModel<UIImage>
+    private let viewModel: FeedImageViewModel
     private let loadImageData: () -> Void
     private let cancelImageDataLoad: () -> Void
     private var cell: FeedImageCell?
     
     public init(
-        viewModel: FeedImageViewModel<UIImage>,
+        viewModel: FeedImageViewModel,
         loadImageData: @escaping () -> Void,
         cancelImageDataLoad: @escaping () -> Void
     ) {
@@ -35,10 +35,7 @@ public final class FeedImageCellController: FeedImageView, ResourceView, Resourc
         loadImageData()
         return cell!
     }
-    
-    public func display(_ viewModel: FeedImageViewModel<UIImage>) {
-    }
-    
+        
     public func display(_ viewModel: UIImage) {
         cell?.feedImageView.setImageAnimated(viewModel)
     }
