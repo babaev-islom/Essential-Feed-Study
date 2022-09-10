@@ -20,8 +20,6 @@ final class FeedSnapshotTests: XCTestCase {
         assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "FEED_WITH_CONTENT_dark")
     }
     
-    
-    
     func test_feedWithFailedImageLoader() {
         let sut = makeSUT()
         
