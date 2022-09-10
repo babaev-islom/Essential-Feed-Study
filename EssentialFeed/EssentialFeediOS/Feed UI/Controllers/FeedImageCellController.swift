@@ -8,7 +8,7 @@
 import UIKit
 import EssentialFeed
 
-public final class FeedImageCellController: ResourceView, ResourceLoadingView, ResourceErrorView {
+public final class FeedImageCellController: ResourceView, ResourceLoadingView, ResourceErrorView, CellController {
     public typealias ResourceViewModel = UIImage
     
     private let viewModel: FeedImageViewModel
@@ -26,7 +26,7 @@ public final class FeedImageCellController: ResourceView, ResourceLoadingView, R
         self.cancelImageDataLoad = cancelImageDataLoad
     }
     
-    func view(in tableView: UITableView) -> UITableViewCell {
+    public func view(in tableView: UITableView) -> UITableViewCell {
         cell = tableView.dequeueReusableCell()
         cell?.locationContainer.isHidden = !viewModel.hasLocation
         cell?.locationLabel.text = viewModel.location
@@ -48,11 +48,11 @@ public final class FeedImageCellController: ResourceView, ResourceLoadingView, R
         cell?.feedImageRetryButton.isHidden = (viewModel.message == nil)
     }
     
-    func preload() {
+    public func preload() {
         loadImageData()
     }
     
-    func cancelLoad() {
+    public func cancelLoad() {
         releaseCellForReuse()
         cancelImageDataLoad()
     }
