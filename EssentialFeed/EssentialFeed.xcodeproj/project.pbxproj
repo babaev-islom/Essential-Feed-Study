@@ -25,6 +25,8 @@
 		443D36BB28CC76FB001B1B1F /* SharedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36BA28CC76FB001B1B1F /* SharedLocalizationTests.swift */; };
 		443D36BC28CC774E001B1B1F /* Shared.strings in Resources */ = {isa = PBXBuildFile; fileRef = 443D36BE28CC774E001B1B1F /* Shared.strings */; };
 		443D36C228CC794B001B1B1F /* SharedLocalizationTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36C128CC794B001B1B1F /* SharedLocalizationTestHelpers.swift */; };
+		443D36C428CC7AA6001B1B1F /* ResourceLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36C328CC7AA6001B1B1F /* ResourceLoadingView.swift */; };
+		443D36C628CC7ABB001B1B1F /* ResourceLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D36C528CC7ABB001B1B1F /* ResourceLoadingViewModel.swift */; };
 		4442DE1428A90A5300FA294F /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; };
 		4442DE1528A90A5300FA294F /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44CA46A12892D83400A083FE /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4442DE1928A90AA200FA294F /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FBB0A28991EA500CE44D8 /* XCTestCase+MemoryLeakTracking.swift */; };
@@ -170,6 +172,8 @@
 		443D36BF28CC7752001B1B1F /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Shared.strings; sourceTree = "<group>"; };
 		443D36C028CC7753001B1B1F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Shared.strings"; sourceTree = "<group>"; };
 		443D36C128CC794B001B1B1F /* SharedLocalizationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLocalizationTestHelpers.swift; sourceTree = "<group>"; };
+		443D36C328CC7AA6001B1B1F /* ResourceLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingView.swift; sourceTree = "<group>"; };
+		443D36C528CC7ABB001B1B1F /* ResourceLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingViewModel.swift; sourceTree = "<group>"; };
 		4442DE1A28A9105F00FA294F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		444307BE28BB70E60086F483 /* FeedSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSnapshotTests.swift; sourceTree = "<group>"; };
 		444307C128BB741E0086F483 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -360,6 +364,8 @@
 			isa = PBXGroup;
 			children = (
 				443D36B628CC7221001B1B1F /* LoadResourcePresenter.swift */,
+				443D36C328CC7AA6001B1B1F /* ResourceLoadingView.swift */,
+				443D36C528CC7ABB001B1B1F /* ResourceLoadingViewModel.swift */,
 				443D36BE28CC774E001B1B1F /* Shared.strings */,
 			);
 			path = "Shared Presentation";
@@ -950,8 +956,10 @@
 				442F80E228C3A64900339D11 /* ImageComment.swift in Sources */,
 				445EFD0B28A37706001AE8F7 /* CoreDataHelpers.swift in Sources */,
 				44FCAC812897F64B00293E68 /* FeedItemsMapper.swift in Sources */,
+				443D36C428CC7AA6001B1B1F /* ResourceLoadingView.swift in Sources */,
 				44CA46BC2892D8E700A083FE /* FeedLoader.swift in Sources */,
 				44D75E12289CFE1000A9A209 /* FeedCachePolicy.swift in Sources */,
+				443D36C628CC7ABB001B1B1F /* ResourceLoadingViewModel.swift in Sources */,
 				448C6BDE28B37B1000820349 /* FeedImagePresenter.swift in Sources */,
 				442D9EAB28B5008F0041B30A /* CoreDataFeedStore+FeedImageDataStore.swift in Sources */,
 				446B585C28A27E94005ADF61 /* FeedStore.xcdatamodeld in Sources */,
