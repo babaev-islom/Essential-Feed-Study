@@ -86,7 +86,7 @@ extension ListViewController {
             )
             
             stub.controller = cellController
-            return CellController(cellController)
+            return CellController(id: UUID(), cellController)
         }
         display(cells)
     }
