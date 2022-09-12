@@ -67,10 +67,10 @@ extension ListViewController {
     }
     
     var errorMessage: String? {
-        errorView?.message
+        errorView.message
     }
     
     func simulateTapOnErrorMessage() {
-        errorView?.button?.simulateTap()
+        errorView.simulateTap()
     }
 }
