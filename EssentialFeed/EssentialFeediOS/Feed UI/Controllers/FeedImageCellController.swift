@@ -15,16 +15,19 @@ public final class FeedImageCellController: NSObject {
     private let viewModel: FeedImageViewModel
     private let loadImageData: () -> Void
     private let cancelImageDataLoad: () -> Void
+    private let selection: () -> Void
     private var cell: FeedImageCell?
     
     public init(
         viewModel: FeedImageViewModel,
         loadImageData: @escaping () -> Void,
-        cancelImageDataLoad: @escaping () -> Void
+        cancelImageDataLoad: @escaping () -> Void,
+        selection: @escaping () -> Void
     ) {
         self.viewModel = viewModel
         self.loadImageData = loadImageData
         self.cancelImageDataLoad = cancelImageDataLoad
+        self.selection = selection
     }
 }
 
@@ -40,6 +43,10 @@ extension FeedImageCellController: UITableViewDataSource, UITableViewDelegate, U
         }
         loadImageData()
         return cell!
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection()
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
