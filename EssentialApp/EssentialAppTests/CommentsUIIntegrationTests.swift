@@ -13,7 +13,7 @@ import EssentialApp
 import Combine
 
 
-final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
+final class CommentsUIIntegrationTests: XCTestCase {
     
     func test_commentsView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -126,7 +126,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         wait(for: [exp], timeout: 1.0)
     }
 
-    override func test_errorView_dismissesErrorMessageOnTap() {
+    func test_errorView_dismissesErrorMessageOnTap() {
          let (sut, loader) = makeSUT()
 
          sut.loadViewIfNeeded()
@@ -139,7 +139,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
          XCTAssertEqual(sut.errorMessage, nil)
      }
     
-    override func test_errorView_doesNotRenderErrorOnLoad() {
+    func test_errorView_doesNotRenderErrorOnLoad() {
         let (sut, _) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -147,7 +147,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertNil(sut.errorMessage)
     }
     
-    override func test_errorView_rendersErrorMessageOnLoadFeedError() {
+    func test_errorView_rendersErrorMessageOnLoadFeedError() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -156,7 +156,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, loadError)
     }
     
-    override func test_errorView_hidesFeedLoadErrorOnReload() {
+    func test_errorView_hidesCommentsLoadErrorOnReload() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
