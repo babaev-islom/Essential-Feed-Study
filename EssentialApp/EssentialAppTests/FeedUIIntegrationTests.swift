@@ -12,7 +12,7 @@ import EssentialFeediOS
 import EssentialApp
 import Combine
 
-final class FeedUIIntegrationTests: XCTestCase {
+class FeedUIIntegrationTests: XCTestCase {
     
     func tests_feedView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -373,7 +373,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         return (sut, loader)
     }
     
-    private func assertThat(_ sut: ListViewController, isRendering feed: [FeedImage], file: StaticString = #filePath, line: UInt = #line) {
+    func assertThat(_ sut: ListViewController, isRendering feed: [FeedImage], file: StaticString = #filePath, line: UInt = #line) {
         sut.tableView.layoutIfNeeded()
         RunLoop.main.run(until: Date())
         
@@ -386,7 +386,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         }
     }
     
-    private func asserThat(_ sut: ListViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
+    func asserThat(_ sut: ListViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
         let view = sut.feedImageView(at: index)
         
         guard let cell = view as? FeedImageCell else {
@@ -400,7 +400,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(cell.descriptionText, image.description, "Expected description text to be \(String(describing: image.description)) for image view at index (\(index))", file: file, line: line)
     }
     
-    private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
+    func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
         FeedImage(id: UUID(), description: description, location: location, url: url)
     }
     
