@@ -400,7 +400,7 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(cell.descriptionText, image.description, "Expected description text to be \(String(describing: image.description)) for image view at index (\(index))", file: file, line: line)
     }
     
-    func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
+    private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
         FeedImage(id: UUID(), description: description, location: location, url: url)
     }
     

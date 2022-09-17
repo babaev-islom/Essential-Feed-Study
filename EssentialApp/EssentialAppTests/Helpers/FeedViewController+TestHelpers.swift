@@ -19,6 +19,52 @@ extension ListViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
+    var isShowingLoadingIndicator: Bool {
+        refreshControl?.isRefreshing == true
+    }
+    
+    var errorMessage: String? {
+        errorView.message
+    }
+    
+    func simulateTapOnErrorMessage() {
+        errorView.simulateTap()
+    }
+
+}
+    
+extension ListViewController {
+    func numberOfRenderedComments() -> Int {
+        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: commentsSection)
+    }
+    
+    private var commentsSection: Int {
+        return 0
+    }
+    
+    func commentMessage(at row: Int) -> String? {
+        commentView(at: row)?.messageLabel.text
+    }
+    
+    func commentDate(at row: Int) -> String? {
+        commentView(at: row)?.dateLabel.text
+    }
+    
+    func commentUsername(at row: Int) -> String? {
+        commentView(at: row)?.usernameLabel.text
+    }
+    
+    private func commentView(at row: Int) -> ImageCommentCell? {
+        guard numberOfRenderedComments() > row else { return nil }
+        
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: commentsSection)
+        return ds?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
+    }
+
+}
+
+extension ListViewController {
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         feedImageView(at: index) as? FeedImageCell
@@ -52,12 +98,12 @@ extension ListViewController {
         simulateFeedImageViewVisible(at: 0)?.renderedImage
     }
     
-    var isShowingLoadingIndicator: Bool {
-        refreshControl?.isRefreshing == true
-    }
-    
     func numberOfRenderedImageViews() -> Int {
         tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
+    }
+    
+    private var feedImagesSection: Int {
+        return 0
     }
     
     func feedImageView(at row: Int) -> UITableViewCell? {
@@ -66,17 +112,5 @@ extension ListViewController {
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: feedImagesSection)
         return ds?.tableView(tableView, cellForRowAt: index)
-    }
-    
-    private var feedImagesSection: Int {
-        return 0
-    }
-    
-    var errorMessage: String? {
-        errorView.message
-    }
-    
-    func simulateTapOnErrorMessage() {
-        errorView.simulateTap()
     }
 }
