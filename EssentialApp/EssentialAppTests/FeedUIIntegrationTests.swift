@@ -437,14 +437,14 @@ class FeedUIIntegrationTests: XCTestCase {
         
         //MARK: - FeedLoader
         
-        private var feedRequests = [PassthroughSubject<[FeedImage], Error>]()
+        private var feedRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()
         
         var loadFeedCallCount: Int {
             feedRequests.count
         }
      
         func completeFeedLoading(with feed: [FeedImage] = [], at index: Int = 0) {
-            feedRequests[index].send(feed)
+            feedRequests[index].send(Paginated(items: feed))
         }
         
         func completeFeedLoadingWithError(at index: Int = 0) {
@@ -452,8 +452,8 @@ class FeedUIIntegrationTests: XCTestCase {
             feedRequests[index].send(completion: .failure(error))
         }
         
-        func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
-            let publisher = PassthroughSubject<[FeedImage], Error>()
+        func loadPublisher() -> AnyPublisher<Paginated<FeedImage>, Error> {
+            let publisher = PassthroughSubject<Paginated<FeedImage>, Error>()
             feedRequests.append(publisher)
             return publisher.eraseToAnyPublisher()
         }
