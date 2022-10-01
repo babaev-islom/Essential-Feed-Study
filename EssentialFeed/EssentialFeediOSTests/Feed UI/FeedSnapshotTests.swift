@@ -82,7 +82,8 @@ extension ListViewController {
             let cellController = FeedImageCellController(
                 viewModel: stub.viewModel,
                 loadImageData: stub.didRequestImage,
-                cancelImageDataLoad: stub.didCancelImageRequest
+                cancelImageDataLoad: stub.didCancelImageRequest,
+                selection: {}
             )
             
             stub.controller = cellController
