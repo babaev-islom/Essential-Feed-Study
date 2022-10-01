@@ -36,7 +36,6 @@ class FeedUIIntegrationTests: XCTestCase {
         
         sut.simulateTapOnFeedImage(at: 1)
         XCTAssertEqual(selectedImages, [image0, image1])
-
     }
     
     func test_loadFeedActions_requestFeedFromLoader() {
