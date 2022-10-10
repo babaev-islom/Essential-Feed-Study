@@ -78,6 +78,7 @@ final public class ListViewController: UITableViewController, UITableViewDataSou
     public func display(_ viewModel: ResourceErrorViewModel) {
         errorView.message = viewModel.message
     }
+    
     public override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let dl = cellController(at: indexPath)?.delegate
         dl?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
