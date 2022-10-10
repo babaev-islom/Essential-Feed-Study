@@ -30,12 +30,24 @@ extension ListViewController {
     func simulateTapOnErrorMessage() {
         errorView.simulateTap()
     }
-
+    
+    private func numberOfRows(in section: Int) -> Int {
+        tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section) : 0
+    }
+    
+    private func cell(row: Int, section: Int) -> UITableViewCell? {
+        guard numberOfRows(in: section) > row else {
+            return nil
+        }
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
 }
     
 extension ListViewController {
     func numberOfRenderedComments() -> Int {
-        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: commentsSection)
+        numberOfRows(in: commentsSection)
     }
     
     private var commentsSection: Int {
@@ -61,7 +73,6 @@ extension ListViewController {
         let index = IndexPath(row: row, section: commentsSection)
         return ds?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
     }
-
 }
 
 extension ListViewController {
@@ -74,10 +85,12 @@ extension ListViewController {
         delegate?.tableView?(tableView, willDisplay: view, forRowAt: index)
     }
     
-    private func cell(row: Int, section: Int) -> UITableViewCell? {
-        let dataSource = tableView.dataSource
-        let index = IndexPath(row: row, section: section)
-        return dataSource?.tableView(tableView, cellForRowAt: index)
+    var isShowingLoadMoreFeedIndicator: Bool {
+        return loadMoreFeedCell()?.isLoading == true
+    }
+    
+    private func loadMoreFeedCell() -> LoadMoreCell? {
+        cell(row: 0, section: feedLoadMoreSection) as? LoadMoreCell
     }
     
     func simulateTapOnFeedImage(at row: Int) {
