@@ -1,5 +1,5 @@
 //
-//  Pageniated.swift
+//  Paginated.swift
 //  EssentialFeed
 //
 //  Created by Islom Babaev on 01/10/22.
