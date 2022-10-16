@@ -18,18 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var httpClient: HTTPClient = {
         URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }()
-    
-    private lazy var remoteFeedLoader: () -> AnyPublisher<[FeedImage], Error> = {
-        let url = FeedEndpoint.get().url(baseURL: baseURL)
         
-        return { [httpClient] in
-            httpClient
-                .getPublisher(url: url)
-                .tryMap(FeedItemsMapper.map)
-                .eraseToAnyPublisher()
-        }
-    }()
-    
     private lazy var store: FeedStore & FeedImageDataStore = {
         try! CoreDataFeedStore(
             storeURL: NSPersistentContainer
