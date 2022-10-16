@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
     
     private lazy var remoteFeedLoader: () -> AnyPublisher<[FeedImage], Error> = {
-        let url = baseURL.appendingPathComponent("/v1/feed")
+        let url = FeedEndpoint.get().url(baseURL: baseURL)
+        
         return { [httpClient] in
             httpClient
                 .getPublisher(url: url)
