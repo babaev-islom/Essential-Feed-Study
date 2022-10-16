@@ -139,11 +139,15 @@ extension ListViewController {
     }
     
     func renderedFeedImageData(at index: Int) -> Data? {
-        simulateFeedImageViewVisible(at: 0)?.renderedImage
+        simulateFeedImageViewVisible(at: index)?.renderedImage
     }
     
     func numberOfRenderedImageViews() -> Int {
         tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
+    }
+    
+    var canLoadMoreFeed: Bool {
+        loadMoreFeedCell() != nil
     }
     
     private var feedImagesSection: Int {
