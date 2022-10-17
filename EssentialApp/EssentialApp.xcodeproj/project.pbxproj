@@ -44,6 +44,7 @@
 		44E238E628B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		44E238E828B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E238E728B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift */; };
 		44EA2AD228BCD49900A1EB54 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */; };
+		44F99F4028FD3DD400C6C149 /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F99F3F28FD3DD400C6C149 /* NullStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		44E238E528B6523100E94B8A /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		44E238E728B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
+		44F99F3F28FD3DD400C6C149 /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				44E238B828B5FFCE00E94B8A /* AppDelegate.swift */,
 				44E238BA28B5FFCE00E94B8A /* SceneDelegate.swift */,
+				44F99F3F28FD3DD400C6C149 /* NullStore.swift */,
 				44EA2AD128BCD49900A1EB54 /* CombineHelpers.swift */,
 				444307A428BB57B30086F483 /* FeedUIComposer.swift */,
 				444307A528BB57B30086F483 /* LoadResourcePresentationAdapter.swift */,
@@ -330,6 +333,7 @@
 				44E238E828B65DEB00E94B8A /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 				444307AC28BB57B40086F483 /* WeakRefVirtualProxy.swift in Sources */,
 				442AFF8228D5B4B100BBD781 /* CommentsUIComposer.swift in Sources */,
+				44F99F4028FD3DD400C6C149 /* NullStore.swift in Sources */,
 				444307AD28BB57B40086F483 /* LoadResourcePresentationAdapter.swift in Sources */,
 				4428D77628B7AA3600E9E7E7 /* FeedImageDataLoaderCacheDecorator.swift in Sources */,
 			);
