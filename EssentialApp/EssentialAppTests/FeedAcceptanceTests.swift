@@ -234,13 +234,12 @@ final class FeedAcceptanceTests: XCTestCase {
             completion(.success(feedCache))
         }
         
-        func retrieve(dataForURL url: URL, completion: @escaping (FeedImageDataStore.RetrievalResult) -> Void) {
-            completion(.success(feedImageDataCache[url]))
+        func retrieve(dataForURL url: URL) throws -> Data? {
+            feedImageDataCache[url]
         }
         
-        func insert(_ data: Data, for url: URL, completion: @escaping (FeedImageDataStore.InsertionResult) -> Void) {
+        func insert(_ data: Data, for url: URL) throws {
             feedImageDataCache[url] = data
-            completion(.success(()))
         }
     }
 }
